@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HAVAMANA - Weather Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background elements */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .shape2 { top: 20%; right: 10%; animation-delay: 2s; width: 80px; height: 80px; }
+        .shape3 { bottom: 10%; left: 15%; animation-delay: 4s; width: 120px; height: 120px; }
+        .shape4 { bottom: 20%; right: 20%; animation-delay: 1s; width: 60px; height: 60px; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            padding: 48px 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            margin-bottom: 24px;
+        }
+        
+        .logo i {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 32px;
+        }
+        
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e1e8ed;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 400;
+            background: #fff;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .search-input::placeholder {
+            color: #95a5a6;
+            font-weight: 300;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        
+        .search-input:focus + .input-icon {
+            color: #667eea;
+        }
+        
+        .search-btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        
+        .search-btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .search-btn:hover i {
+            transform: translateX(4px);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .feature-card {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            background: rgba(102, 126, 234, 0.08);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .feature-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+        
+        .feature-desc {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+        
+        .popular-cities {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .popular-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 16px;
+        }
+        
+        .city-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .city-tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .city-tag:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 32px 24px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .search-form {
+                gap: 12px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .city-tags {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes shape1"></div>
+        <div class="floating-shapes shape2"></div>
+        <div class="floating-shapes shape3"></div>
+        <div class="floating-shapes shape4"></div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <i class="fas fa-cloud-sun"></i>
+        </div>
+        
+        <!-- Title Section -->
+        <h1>HAVAMANA</h1>
+        <p class="subtitle">Discover weather insights for any city worldwide with beautiful landmark backgrounds</p>
+        
+        <!-- Search Section -->
+        <div class="search-container">
+            <form class="search-form" method="get" action="/weather/">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        name="city" 
+                        class="search-input"
+                        placeholder="Enter city name (e.g., Mumbai, Paris, Tokyo)" 
+                        required
+                        autocomplete="off"
+                    >
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                </div>
+                <button type="submit" class="search-btn">
+                    Search<i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Features Grid -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <div class="feature-title">Live Weather</div>
+                <div class="feature-desc">Real-time updates</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="feature-title">Forecasts</div>
+                <div class="feature-desc">5-day predictions</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <div class="feature-title">Landmarks</div>
+                <div class="feature-desc">Beautiful backgrounds</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="feature-title">Responsive</div>
+                <div class="feature-desc">All devices</div>
+            </div>
+        </div>
+        
+        <!-- Popular Cities -->
+        <div class="popular-cities">
+            <div class="popular-title">Popular Cities</div>
+            <div class="city-tags">
+                <span class="city-tag" onclick="searchCity('Mumbai')">Mumbai</span>
+                <span class="city-tag" onclick="searchCity('Delhi')">Delhi</span>
+                <span class="city-tag" onclick="searchCity('Paris')">Paris</span>
+                <span class="city-tag" onclick="searchCity('London')">London</span>
+                <span class="city-tag" onclick="searchCity('New York')">New York</span>
+                <span class="city-tag" onclick="searchCity('Tokyo')">Tokyo</span>
+                <span class="city-tag" onclick="searchCity('Dubai')">Dubai</span>
+                <span class="city-tag" onclick="searchCity('Sydney')">Sydney</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Reset button state on page load/return
+        window.addEventListener('load', function() {
+            const button = document.querySelector('.search-btn');
+            const input = document.querySelector('.search-input');
+            
+            // Reset button to original state
+            button.innerHTML = 'Search<i class="fas fa-arrow-right"></i>';
+            button.disabled = false;
+            
+            // Clear any error states
+            input.style.borderColor = '#e1e8ed';
+        });
+        
+        // Quick city search function
+        function searchCity(cityName) {
+            document.querySelector('.search-input').value = cityName;
+            document.querySelector('.search-form').submit();
+        }
+        
+        // Input focus animation
+        const input = document.querySelector('.search-input');
+        const container = document.querySelector('.main-container');
+        
+        input.addEventListener('focus', () => {
+            container.style.transform = 'translateY(-10px)';
+        });
+        
+        input.addEventListener('blur', () => {
+            container.style.transform = 'translateY(0)';
+        });
+        
+        // Form validation and loading state
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            const input = document.querySelector('.search-input');
+            const button = document.querySelector('.search-btn');
+            
+            if (input.value.trim() === '') {
+                e.preventDefault();
+                input.style.borderColor = '#e74c3c';
+                input.focus();
+                return;
+            }
+            
+            // Reset border color if valid
+            input.style.borderColor = '#e1e8ed';
+            
+            // Loading state
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+            button.disabled = true;
+            
+            // Reset button after a timeout as backup
+            setTimeout(function() {
+                button.innerHTML = 'Search<i class="fas fa-arrow-right"></i>';
+                button.disabled = false;
+            }, 5000);
+        });
+        
+        // Reset button state when user navigates back
+        window.addEventListener('pageshow', function(e) {
+            if (e.persisted) {
+                const button = document.querySelector('.search-btn');
+                button.innerHTML = 'Search<i class="fas fa-arrow-right"></i>';
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -142,25 +142,11 @@ weather_dashboard/
 3. Copy your Access Key
 4. Add it to your `.env` file
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+**Balasubramanyam K S **
+- GitHub: [@yourusername]( https://github.com/BALASUBRAMANYAMKS)
+- LinkedIn: [Your Profile](www.linkedin.com/in/ksb2003  )
 
 ## 🙏 Acknowledgments
 
@@ -169,10 +155,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Chart.js](https://www.chartjs.org/) for data visualization
 - [Django](https://www.djangoproject.com/) framework
 
-## 📧 Contact
-
-For questions or feedback, please reach out at: your.email@example.com
-
----
-
-⭐ If you found this project helpful, please consider giving it a star!

@@ -148,7 +148,7 @@ weather_dashboard/
 
 ## 👨‍💻 Author
 
-**Balasubramanyam K S **
+Balasubramanyam K S 
 - GitHub: https://github.com/BALASUBRAMANYAMKS
 - LinkedIn: www.linkedin.com/in/ksb2003
 
@@ -158,6 +158,7 @@ weather_dashboard/
 - [Unsplash](https://unsplash.com/) for beautiful background images
 - [Chart.js](https://www.chartjs.org/) for data visualization
 - [Django](https://www.djangoproject.com/) framework
+
 
 
 

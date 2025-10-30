@@ -19,7 +19,11 @@ A modern, responsive Django-based weather dashboard that provides real-time weat
 
 ## 🚀 Demo
 
-![Dashboard Preview](screenshot.png)
+<img width="1885" height="895" alt="Screenshot 2025-10-30 121703" src="https://github.com/user-attachments/assets/d29859a1-1f33-4df7-b9ea-d1c1310cf501" />
+<img width="1906" height="916" alt="Screenshot 2025-10-30 121719" src="https://github.com/user-attachments/assets/aead24f6-a14c-4048-b7c1-a350a27b1b9e" />
+<img width="1882" height="809" alt="Screenshot 2025-10-30 121738" src="https://github.com/user-attachments/assets/e7381a2c-b4a7-4195-b722-f68677d1029f" />
+
+
 *Real-time weather dashboard with interactive charts and dynamic backgrounds*
 
 ## 🛠️ Technologies Used
@@ -145,7 +149,7 @@ weather_dashboard/
 ## 👨‍💻 Author
 
 **Balasubramanyam K S **
-- GitHub: [@yourusername]( https://github.com/BALASUBRAMANYAMKS)
+- GitHub: ( https://github.com/BALASUBRAMANYAMKS)
 - LinkedIn: [Your Profile](www.linkedin.com/in/ksb2003  )
 
 ## 🙏 Acknowledgments
@@ -154,4 +158,5 @@ weather_dashboard/
 - [Unsplash](https://unsplash.com/) for beautiful background images
 - [Chart.js](https://www.chartjs.org/) for data visualization
 - [Django](https://www.djangoproject.com/) framework
+
 
